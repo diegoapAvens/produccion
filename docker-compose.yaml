@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  suricata:
+    image: diegoadvens/prueba:latest
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_NICE
+    command: ["-i", "eno1"]
+    volumes:
+      - suricata_logs:/var/log/suricata
+      - suricata_lib:/var/lib/suricata
+      - suricata_conf:/etc/suricata
+    restart: unless-stopped
+
+volumes:
+  suricata_logs:
+  suricata_lib:
+  suricata_conf:
